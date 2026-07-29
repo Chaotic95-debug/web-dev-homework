@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Portfolio | Home</title>
+  <style>
+    /* ==========================================================================
+       1. Design System & CSS Variables
+       ========================================================================== */
+    :root {
+      --bg-primary: #0b0f19;        /* Deep space dark background */
+      --bg-surface: #111827;        /* Lighter background for cards/containers */
+      --bg-surface-hover: #1f2937;  /* Hover state for cards */
+      --text-main: #f3f4f6;         /* Bright off-white for text */
+      --text-muted: #9ca3af;        /* Soft gray for body copy */
+      --accent-cyan: #06b6d4;       /* Electric cyan accent */
+      --accent-blue: #3b82f6;       /* Vibrant tech blue accent */
+      --border-color: #1f2937;      /* Subtle divider color */
+      --border-highlight: #374151;  /* Card outline color */
+      --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 900px;
+      --radius: 8px;
+    }
+
+    /* ==========================================================================
+       2. Base Reset & Layout
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-muted);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header, main, footer {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    main {
+      flex: 1;
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+    }
+
+    /* ==========================================================================
+       3. Typography & Headings
+       ========================================================================== */
+    h1, h2, h3 {
+      color: var(--text-main);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-cyan);
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+
+    /* ==========================================================================
+       4. Header & Navigation
+       ========================================================================== */
+    header {
+      padding-top: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav {
+      margin-top: 1.25rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover, nav a strong {
+      color: var(--accent-cyan);
+    }
+
+    nav a strong {
+      border-bottom: 2px solid var(--accent-cyan);
+      padding-bottom: 0.25rem;
+    }
+
+    /* ==========================================================================
+       5. Sections & Lists
+       ========================================================================== */
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    li strong {
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       6. Footer
+       ========================================================================== */
+    footer {
+      padding-top: 1.5rem;
+      padding-bottom: 2rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    footer p {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tech Innovations Hub</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html"><strong>Home</strong></a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About &amp; Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Welcome to the Frontier of Modern Tech</h2>
+      <p>This platform serves as a digital sandbox exploring emerging web architectures, autonomous systems, and modern semantic development frameworks.</p>
+    </section>
+
+    <section>
+      <h3>Featured Core Areas</h3>
+      <ul>
+        <li><strong>Web Engineering:</strong> Writing highly accessible, clean structural code.</li>
+        <li><strong>Systems Automation:</strong> Shifting computing logic closer to edge networks.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Tech Trends Hub. All structural layouts reserved.</p>
+  </footer>
+
+</body>
+</html>
