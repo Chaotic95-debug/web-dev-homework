@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Portfolio | Projects</title>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-surface: #111827;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent-cyan: #06b6d4;
+      --accent-blue: #3b82f6;
+      --border-color: #1f2937;
+      --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      --max-width: 1200px;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-muted);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header, main, footer {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    main { flex: 1; padding-top: 2rem; padding-bottom: 3rem; }
+
+    header {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      color: var(--text-main);
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+    nav a:hover, nav a strong { color: var(--accent-cyan); }
+
+    /* CSS Grid Layout Section for Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr; /* Single column on 320px mobile */
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    article {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    article h3 {
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      padding: 1.5rem 1rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* Media Queries for Responsive Multi-Column Grid */
+    @media (min-width: 768px) {
+      header, main, footer { padding: 0 2rem; }
+      header { flex-direction: row; justify-content: space-between; align-items: center; }
+      nav ul { flex-direction: row; gap: 1.5rem; }
+
+      /* 2-column grid on tablets */
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      /* 3-column grid on desktop */
+      .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tech Innovations Hub</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html"><strong>Projects</strong></a></li>
+        <li><a href="about.html">About &amp; Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Engineering Projects &amp; Lab Builds</h2>
+      <p>A structured index tracking development iterations and foundational programming assignments.</p>
+    </section>
+
+    <section>
+      <h2>Active Deployments</h2>
+      
+      <!-- Responsive CSS Grid Container -->
+      <div class="projects-grid">
+        <article>
+          <h3>Semantic Web Architecture</h3>
+          <p>Building highly scannable, multi-section documents adhering strictly to correct heading hierarchy and structural standards.</p>
+        </article>
+
+        <article>
+          <h3>Edge Sensor Integration</h3>
+          <p>Configuring microprocessors to parse real-time localized data streams without relying on centralized server clusters.</p>
+        </article>
+
+        <article>
+          <h3>Responsive Flex &amp; Grid Systems</h3>
+          <p>Designing mobile-first layouts with media queries preventing horizontal overflow across 320px, 768px, and 1200px viewports.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Tech Trends Hub. All structural layouts reserved.</p>
+  </footer>
+
+</body>
+</html>
