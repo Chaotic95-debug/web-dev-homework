@@ -9,7 +9,7 @@
       --bg-primary: #0b0f19;
       --bg-surface: #111827;
       --text-main: #f3f4f6;
-      --text-muted: #d1d5db;
+      --text-muted: #d1d5db; /* FIX 2: High contrast pass */
       --accent-cyan: #22d3ee;
       --accent-blue: #3b82f6;
       --error-color: #f87171;
@@ -62,79 +62,33 @@
     nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
     nav a { color: var(--text-muted); text-decoration: none; font-weight: 600; }
     nav a:hover, nav a[aria-current="page"] { color: var(--accent-cyan); }
-    nav a[aria-current="page"] { border-bottom: 2px solid var(--accent-cyan); padding-bottom: 2px; }
 
-    /* Accessible Form & Gestalt Common Region */
     form {
-      background-color: var(--bg-surface);
-      padding: 1.75rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border-color);
+      background-color: var(--bg-surface); padding: 1.75rem;
+      border-radius: var(--radius); border: 1px solid var(--border-color);
       max-width: 650px;
     }
 
     fieldset {
-      border: 1px solid var(--border-highlight);
-      border-radius: 6px;
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
+      border: 1px solid var(--border-highlight); border-radius: 6px;
+      padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem;
     }
 
-    legend {
-      color: var(--text-main);
-      font-weight: 700;
-      padding: 0 0.5rem;
-      font-size: 1.1rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    label {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
+    legend { color: var(--text-main); font-weight: 700; padding: 0 0.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    label { color: var(--text-main); font-weight: 600; }
     .required-star { color: var(--error-color); }
 
     input, textarea {
-      width: 100%;
-      padding: 0.75rem;
-      background-color: var(--bg-primary);
-      border: 1px solid var(--border-highlight);
-      border-radius: 6px;
-      color: var(--text-main);
-      font-family: inherit;
-      font-size: 1rem;
-    }
-
-    /* Accessible Error States */
-    input[aria-invalid="true"], textarea[aria-invalid="true"] {
-      border-color: var(--error-color);
-    }
-
-    .error-message {
-      color: var(--error-color);
-      font-size: 0.875rem;
-      font-weight: 500;
+      width: 100%; padding: 0.75rem;
+      background-color: var(--bg-primary); border: 1px solid var(--border-highlight);
+      border-radius: 6px; color: var(--text-main); font-family: inherit;
     }
 
     button[type="submit"] {
       background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-      color: #000000;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-weight: 700;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      align-self: flex-start;
-      margin-top: 0.5rem;
+      color: #000000; border: none; padding: 0.75rem 1.5rem;
+      font-weight: 700; border-radius: 6px; cursor: pointer; align-self: flex-start;
     }
 
     footer {
@@ -167,14 +121,14 @@
   <main id="main-content">
     <section>
       <h2>About the Developer</h2>
-      <p>Focused on mastering the core pillars of computing infrastructure, database logic, and accessible frontend optimization techniques.</p>
+      <p>Focused on mastering computing infrastructure, database logic, and accessible web standards.</p>
     </section>
 
     <section>
       <h2>Get in Touch</h2>
-      <p>Fill out the fields below to initiate a project consultation or technical inquiry.</p>
+      <p>Fill out the fields below to initiate a consultation.</p>
       
-      <form action="#" method="post" novalidate>
+      <form action="#" method="post">
         <fieldset>
           <legend>Contact Form</legend>
 
@@ -182,45 +136,22 @@
             <label for="full-name">
               Full Name <span class="required-star" aria-hidden="true">*</span>
             </label>
-            <input 
-              type="text" 
-              id="full-name" 
-              name="full-name" 
-              required 
-              aria-required="true"
-            >
+            <input type="text" id="full-name" name="full-name" required aria-required="true">
           </div>
 
+          <!-- FIX 1: Explicitly matched label "for" attribute to input "id" -->
           <div class="form-group">
             <label for="email-addr">
               Email Address <span class="required-star" aria-hidden="true">*</span>
             </label>
-            <input 
-              type="email" 
-              id="email-addr" 
-              name="email-addr" 
-              required 
-              aria-required="true"
-              aria-invalid="true"
-              aria-describedby="email-error"
-            >
-            <!-- Accessible Error State Example -->
-            <span id="email-error" class="error-message">
-              Please enter a valid email address (e.g., user@domain.com).
-            </span>
+            <input type="email" id="email-addr" name="email-addr" required aria-required="true">
           </div>
 
           <div class="form-group">
             <label for="user-message">
               Message <span class="required-star" aria-hidden="true">*</span>
             </label>
-            <textarea 
-              id="user-message" 
-              name="user-message" 
-              rows="4" 
-              required 
-              aria-required="true"
-            ></textarea>
+            <textarea id="user-message" name="user-message" rows="4" required aria-required="true"></textarea>
           </div>
 
           <button type="submit">Submit Request</button>
@@ -228,9 +159,6 @@
       </form>
     </section>
   </main>
-
-  <footer>
-    <p>&copy; 2026 Tech Trends Hub. All structural layouts reserved.</p>
   </footer>
 
 </body>

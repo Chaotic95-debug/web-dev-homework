@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -11,7 +11,7 @@
       --text-main: #f3f4f6;
       --text-muted: #d1d5db;
       --accent-cyan: #22d3ee;
-      --accent-blue: #3b82f6;
+      --accent-blue: #3b82f6; /* Might use this for buttons later? */
       --border-color: #1f2937;
       --font-family: 'Inter', system-ui, -apple-system, sans-serif;
       --max-width: 1200px;
@@ -20,6 +20,7 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Accessibility is good, but I'll make the focus look a bit less jarring */
     :focus-visible { outline: 3px solid var(--accent-cyan); outline-offset: 2px; }
 
     .skip-link {
@@ -60,9 +61,10 @@
     nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
     nav a { color: var(--text-muted); text-decoration: none; font-weight: 600; }
     nav a:hover, nav a[aria-current="page"] { color: var(--accent-cyan); }
+    
     nav a[aria-current="page"] { border-bottom: 2px solid var(--accent-cyan); padding-bottom: 2px; }
 
-    /* Gestalt Principles: Proximity & Common Region */
+    */
     .projects-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -120,6 +122,7 @@
       <p>A structured index tracking development iterations and foundational programming assignments.</p>
     </section>
 
+    
     <section>
       <h2>Active Deployments</h2>
       <div class="projects-grid">
@@ -140,10 +143,6 @@
       </div>
     </section>
   </main>
-
-  <footer>
-    <p>&copy; 2026 Tech Trends Hub. All structural layouts reserved.</p>
-  </footer>
 
 </body>
 </html>

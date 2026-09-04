@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessible Form & Live API</title>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-surface: #111827;
+      --text-main: #f3f4f6;
+      --text-muted: #d1d5db;
+      --accent-cyan: #22d3ee;
+      --accent-blue: #3b82f6;
+      --error-color: #f87171;
+      --success-color: #4ade80;
+      --border-color: #1f2937;
+      --border-highlight: #374151;
+      --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-muted);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    main {
+      width: 100%;
+      max-width: 650px;
+    }
+
+    h1, h2, h3 { color: var(--text-main); margin-bottom: 0.5rem; }
+
+    section {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    fieldset {
+      border: 1px solid var(--border-highlight);
+      border-radius: 6px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    legend {
+      color: var(--text-main);
+      font-weight: 700;
+      padding: 0 0.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    label {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .required-star { color: var(--error-color); }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-highlight);
+      border-radius: 6px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent-cyan);
+      outline-offset: 2px;
+    }
+
+    input[aria-invalid="true"], 
+    select[aria-invalid="true"], 
+    textarea[aria-invalid="true"] {
+      border-color: var(--error-color);
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    .status-banner {
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      display: none;
+      font-weight: 600;
+    }
+
+    .status-banner.success {
+      background-color: rgba(74, 222, 128, 0.1);
+      border: 1px solid var(--success-color);
+      color: var(--success-color);
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: #000000;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+
+    .api-card {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-highlight);
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <main id="main-content">
+    
+    <section>
+      <h1>User Registration</h1>
+      <p style="margin-bottom: 1.5rem;">Please fill out all required fields below.</p>
+      
+      <div id="form-success" class="status-banner success" role="status" tabindex="-1">
+        Form submitted successfully!
+      </div>
+
+      <form id="registration-form" action="#" method="post" novalidate>
+        <fieldset>
+          <legend>Account Information</legend>
+
+          <div class="form-group">
+            <label for="full-name">
+              Full Name <span class="required-star" aria-hidden="true">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="full-name" 
+              name="full-name" 
+              required 
+              aria-required="true"
+              aria-describedby="full-name-error"
+            >
+            <span id="full-name-error" class="error-message" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email-addr">
+              Email Address <span class="required-star" aria-hidden="true">*</span>
+            </label>
+            <input 
+              type="email" 
+              id="email-addr" 
+              name="email-addr" 
+              required 
+              aria-required="true"
+              aria-describedby="email-addr-error"
+            >
+            <span id="email-addr-error" class="error-message" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="role-select">
+              Primary Role <span class="required-star" aria-hidden="true">*</span>
+            </label>
+            <select 
+              id="role-select" 
+              name="role-select" 
+              required 
+              aria-required="true"
+              aria-describedby="role-select-error"
+            >
+              <option value="">-- Select a Role --</option>
+              <option value="developer">Developer</option>
+              <option value="designer">Designer</option>
+              <option value="student">Student</option>
+            </select>
+            <span id="role-select-error" class="error-message" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="user-bio">
+              Short Bio <span class="required-star" aria-hidden="true">*</span>
+            </label>
+            <textarea 
+              id="user-bio" 
+              name="user-bio" 
+              rows="3" 
+              required 
+              aria-required="true"
+              aria-describedby="user-bio-error"
+            ></textarea>
+            <span id="user-bio-error" class="error-message" role="alert"></span>
+          </div>
+
+          <button type="submit">Complete Registration</button>
+        </fieldset>
+      </form>
+    </section>
+
+    <section>
+      <h2>Live Telemetry</h2>
+      <p>Data fetched asynchronously via public API:</p>
+      <div id="api-display">
+        <p>Loading live repository data...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const regForm = document.querySelector('#registration-form');
+      // I'll grab these inputs as a NodeList, but I might iterate over them differently later
+      const formFields = regForm.querySelectorAll('input[required], select[required], textarea[required]');
+      const successBanner = document.querySelector('#form-success');
+
+      // Simple email check. Regex is always a bit tricky, but this one works for now.
+      function checkEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      // Helper to find the label text. 
+      // Sometimes I forget to add the 'for' attribute, but here it looks okay.
+      function findLabel(field) {
+        const label = document.querySelector(`label[for="${field.id}"]`);
+        return label ? label.textContent.replace('*', '').trim() : 'This field';
+      }
+
+      // This function handles the validation logic for a single input.
+      function doValidation(field) {
+        const errorSpan = document.querySelector(`#${field.id}-error`);
+        let isValid = true;
+        let errorMessage = '';
+
+        // Check if it's empty
+        if (!field.value.trim()) {
+          isValid = false;
+          errorMessage = `${findLabel(field)} cannot be empty.`;
+        } 
+        // Check email format if it's an email field
+        else if (field.type === 'email' && !checkEmail(field.value.trim())) {
+          isValid = false;
+          errorMessage = 'Please enter a valid email address (must include @ and domain).';
+        }
+
+        // Show/Hide error
+        if (!isValid) {
+          field.setAttribute('aria-invalid', 'true');
+          if (errorSpan) {
+            errorSpan.textContent = errorMessage;
+            errorSpan.style.display = 'block';
+          }
+        } else {
+          // If it's valid, clear the error
+          field.removeAttribute('aria-invalid');
+          if (errorSpan) {
+            errorSpan.textContent = '';
+            errorSpan.style.display = 'none';
+          }
+        }
+
+        return isValid;
+      }
+
+      // Adding listeners to each field. 
+      // I prefer a standard for-loop here because I find it easier to read than forEach.
+      for (let i = 0; i < formFields.length; i++) {
+        let field = formFields[i];
+        
+        field.addEventListener('input', () => {
+            // Clear error while typing
+            field.removeAttribute('aria-invalid');
+            const errorSpan = document.querySelector(`#${field.id}-error`);
+            if (errorSpan) errorSpan.style.display = 'none';
+        });
+
+        field.addEventListener('blur', () => {
+            doValidation(field);
+        });
+      }
+
+      // Handle the form submission
+      regForm.addEventListener('submit', (e) => {
+        e.preventDefault(); 
+        
+        let isFormValid = true;
+        let firstErrorField = null;
+
+        // Loop through everything to make sure it's all good before submitting
+        for (let i = 0; i < formFields.length; i++) {
+          let field = formFields[i];
+          const valid = doValidation(field);
+          
+          if (!valid) {
+            isFormValid = false;
+            // Keep track of the first error so we can focus it later
+            if (!firstErrorField) firstErrorField = field;
+          }
+        }
+
+        if (!isFormValid) {
+          if (firstErrorField) firstErrorField.focus(); 
+          successBanner.style.display = 'none';
+        } else {
+          successBanner.style.display = 'block';
+          successBanner.focus();
+          regForm.reset();
+        }
+      });
+
+      // API Fetch stuff
+      const apiDisplay = document.querySelector('#api-display');
+      
+      // Hardcoded URL for now. Should probably make this a variable later.
+      fetch('https://api.github.com/repos/octocat/Hello-World')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Server returned status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // console.log(data); // Leaving this here to debug if the data structure changes
+          
+          apiDisplay.innerHTML = `
+            <div class="api-card">
+              <h3>${data.full_name}</h3>
+              <p>${data.description}</p>
+              <p><strong>Stars:</strong> ${data.stargazers_count} | <strong>Forks:</strong> ${data.forks_count}</p>
+            </div>
+          `;
+        })
+        .catch(error => {
+          console.error('Fetch error:', error);
+          apiDisplay.innerHTML = `
+            <p class="error-message" style="display:block;">
+              Failed to load API data: ${error.message}
+            </p>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>
